@@ -1,0 +1,60 @@
+{
+    "components": [
+        {
+            "id": "runtime-k3d",
+            "alias": "k3d",
+            "type": "runtime",
+            "programs": [
+                {
+                    "id": "configure_controlplane",
+                    "executable": "./src/runtime/configure_controlplane.sh"
+                },
+                {
+                    "id": "deploy_runtime",
+                    "executable": "./src/runtime/deploy_runtime.sh"
+                },
+                {
+                    "id": "reset_controlplane",
+                    "executable": "./src/runtime/reset_controlplane.sh"
+                },
+                {
+                    "id": "uninstall_runtime",
+                    "executable": "./src/runtime/uninstall_runtime.sh"
+                }
+            ],
+            "start": [
+                {
+                    "id": "configure_controlplane"
+                },
+                {
+                    "id": "deploy_runtime",
+                    "dependsOn": "configure_controlplane"
+                }
+            ]
+        },
+        {
+            "id": "deployment-k3d",
+            "alias": "k3d",
+            "type": "deployment",
+            "programs": [
+                {
+                    "id": "build_vehicleapp",
+                    "executable": "./src/deployment/build_vehicleapp.sh"
+                },
+                {
+                    "id": "deploy_vehicleapp",
+                    "executable": "./src/deployment/deploy_vehicleapp.sh"
+                }
+            ],
+            "start": [
+                {
+                    "id": "build_vehicleapp"
+                },
+                {
+                    "id": "deploy_vehicleapp",
+                    "dependsOn": "build_vehicleapp"
+                }
+            ]
+        }
+    ]
+}
