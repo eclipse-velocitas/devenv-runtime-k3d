@@ -58,3 +58,5 @@ imageFeederCan:
 
 nameOverride: ""
 fullnameOverride: ""
+
+vspecFilePath: ""

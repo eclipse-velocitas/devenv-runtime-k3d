@@ -15,6 +15,7 @@
 
 if ! helm status vehicleappruntime &> /dev/null
 then
+
     # ROOT_DIRECTORY=$( realpath "$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )/../../../.." )
     ROOT_DIRECTORY=$VELOCITAS_WORKSPACE_DIR
     DEPENDENCIES=$(cat $ROOT_DIRECTORY/app/AppManifest.json | jq .[].dependencies)
@@ -47,6 +48,14 @@ then
         fi
     done
 
+    VSPEC_FILE_PATH=$(echo $VELOCITAS_PROJECT_CACHE_DATA | jq .vspec_file_path | tr -d '"')
+
+    if [ ! "$VSPEC_FILE_PATH" == null ]
+        then
+            echo "Creating configmap for vspec file"
+            kubectl create configmap vspec-config --from-file=$VSPEC_FILE_PATH
+    fi
+
     # We set the tag to the version from the variables above in the script. This overwrites the default values in the values-file.
     helm install vehicleappruntime \
         $CONFIG_DIR/helm \
@@ -54,6 +63,7 @@ then
         --set imageSeatService.tag=$SEATSERVICE_TAG \
         --set imageVehicleDataBroker.tag=$DATABROKER_TAG \
         --set imageFeederCan.tag=$FEEDERCAN_TAG \
+        --set vspecFilePath=$VSPEC_FILE_PATH \
         --wait \
         --timeout 60s \
         --debug
