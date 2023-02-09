@@ -49,7 +49,7 @@ then
 
     VSPEC_FILE_PATH=$(echo $VELOCITAS_PROJECT_CACHE_DATA | jq .vspec_file_path | tr -d '"')
 
-    if [ ! "$VSPEC_FILE_PATH" == null ]
+    if [ ! "$VSPEC_FILE_PATH" == null ] && [ -n "$VSPEC_FILE_PATH" ]
         then
             echo "Creating configmap for vspec file"
             kubectl create configmap vspec-config --from-file=$VSPEC_FILE_PATH
