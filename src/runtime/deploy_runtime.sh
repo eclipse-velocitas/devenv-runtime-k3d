@@ -15,9 +15,7 @@
 
 if ! helm status vehicleappruntime &> /dev/null
 then
-    # ROOT_DIRECTORY=$( realpath "$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )/../../../.." )
-    ROOT_DIRECTORY=$VELOCITAS_WORKSPACE_DIR
-    DEPENDENCIES=$(cat $ROOT_DIRECTORY/app/AppManifest.json | jq .[].dependencies)
+    DEPENDENCIES=$(echo $VELOCITAS_APP_MANIFEST | jq .[].dependencies)
     SERVICES=$(echo $DEPENDENCIES | jq '.services')
 
     SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
@@ -47,7 +45,7 @@ then
         fi
     done
 
-    VSPEC_FILE_PATH=$(echo $VELOCITAS_PROJECT_CACHE_DATA | jq .vspec_file_path | tr -d '"')
+    VSPEC_FILE_PATH=$(echo $VELOCITAS_CACHE_DATA | jq .vspec_file_path | tr -d '"')
 
     if [ ! "$VSPEC_FILE_PATH" == null ] && [ -n "$VSPEC_FILE_PATH" ]
         then
