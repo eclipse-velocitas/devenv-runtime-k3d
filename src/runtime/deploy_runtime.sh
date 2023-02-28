@@ -15,7 +15,7 @@
 
 if ! helm status vehicleappruntime &> /dev/null
 then
-    DEPENDENCIES=$(echo $VELOCITAS_APP_MANIFEST | jq .[].dependencies)
+    DEPENDENCIES=$(echo $VELOCITAS_APP_MANIFEST | jq .dependencies)
     SERVICES=$(echo $DEPENDENCIES | jq '.services')
 
     SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )

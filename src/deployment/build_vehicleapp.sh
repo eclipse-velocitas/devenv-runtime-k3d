@@ -13,8 +13,8 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-APP_NAME=$(echo $VELOCITAS_APP_MANIFEST | jq .[].Name | tr -d '"' | tr '[:upper:]' '[:lower:]')
-DOCKERFILE_FILE="$(echo $VELOCITAS_APP_MANIFEST | jq .[].Dockerfile | tr -d '"')"
+APP_NAME=$(echo $VELOCITAS_APP_MANIFEST | jq .Name | tr -d '"' | tr '[:upper:]' '[:lower:]')
+DOCKERFILE_FILE="$(echo $VELOCITAS_APP_MANIFEST | jq .Dockerfile | tr -d '"')"
 
 if [ -n "$HTTP_PROXY" ]; then
     echo "Building image with proxy configuration"
