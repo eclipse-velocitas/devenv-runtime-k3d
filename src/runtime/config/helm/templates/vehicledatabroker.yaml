@@ -43,6 +43,19 @@ spec:
             - name: default
               containerPort: {{.Values.imageVehicleDataBroker.daprAppPort}}
               protocol: TCP
+      {{- if .Values.vspecFilePath }}
+          env:
+            - name: KUKSA_DATA_BROKER_METADATA_FILE
+              value: "{{.Values.vspecFilePath}}"
+          volumeMounts:
+          - name: vspec
+            mountPath: "{{.Values.vspecFilePath}}"
+            subPath: vspec.json
+      volumes:
+        - name: vspec
+          configMap:
+            name: vspec-config
+      {{- end }}
 
 ---
 apiVersion: v1
