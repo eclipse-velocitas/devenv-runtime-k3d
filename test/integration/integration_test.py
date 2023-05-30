@@ -60,7 +60,6 @@ def escape_ansi(line):
 
 def matches_any_regex(regex_dict: dict[Pattern, bool], input: str) -> bool:
     final_flag = True
-    # optional print
     print(input)
     for reg in regex_dict:
         if not regex_dict[reg]:
