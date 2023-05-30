@@ -72,7 +72,7 @@ def matches_any_regex(regex_dict: dict[Pattern, bool], input: str) -> bool:
 
 def check_cluster_status_and_dapr(kubectl_regs: dict, dapr_regs: dict) -> bool:
     command_logs_kubectl = check_output(["kubectl", "cluster-info"]).decode()
-    command_logs_dapr = check_output(["dapr", "status", "-k"]).decode() 
+    command_logs_dapr = check_output(["dapr", "status", "-k"]).decode()
     command_logs_kubectl = escape_ansi(command_logs_kubectl)
     return matches_any_regex(kubectl_regs, command_logs_kubectl) and matches_any_regex(dapr_regs, command_logs_dapr)
 
