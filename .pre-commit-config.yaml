@@ -8,5 +8,5 @@ repos:
     -   id: end-of-file-fixer
     -   id: check-yaml
         args: [--allow-multiple-documents]
-        exclude: ^src/deployment/config/helm/templates/|^src/runtime/config/helm/templates/|^src/runtime/config/volume/
+        exclude: ^src/deployment/config/helm/templates/|^src/runtime/config/helm/templates/|^src/runtime/config/volume/|^test/.dapr/
     -   id: check-added-large-files
