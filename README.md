@@ -5,7 +5,7 @@ Repo for k3d Runtime Configuration
 ***
 
 > [!WARNING]
-> This repository is deprecated and will be "archived"!
+> This repository is deprecated and is not maintained any longer!
 >
 > It is not used for runtime configuration any longer since releasing:
 > * v0.1.0 of [vehicle-app-python-template](https://github.com/eclipse-velocitas/vehicle-app-python-template) end of May 2023,
